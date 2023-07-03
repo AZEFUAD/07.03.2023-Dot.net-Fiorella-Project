@@ -1,0 +1,59 @@
+﻿@using Fiorella.Areas.Admin.ViewModels.ProductCategory
+@model ProductCategoryIndexVM
+
+<!-- Begin Page Content -->
+<div class="container-fluid">
+    <!--Page Heading-->
+    <h1 class="h3 mb-2 text-gray-800">Product categories</h1>
+
+    <a class="btn btn-primary" asp-action="create" asp-controller="productcategory">Create</a>
+
+    <!-- DataTales Example-->
+    <div class="card shadow mb-4">
+       <div class="card-body">
+           <div class="table-responsive">
+               <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                   <thead>
+                       <tr>
+                           <th>Name</th>
+                           <th>Status</th>
+                           <th>Created Date</th>
+                           <th>Modified Date</th>
+                           <th>Deleted Date</th>
+                           <th>Actions</th>
+                       </tr>
+                   </thead>
+                   <tbody>
+                        @foreach (var productCategory in Model.ProductCategories)
+                        {
+                            <tr>
+                                <td>@productCategory.Name</td>
+                                <td>
+                                    @if(productCategory.IsDeleted){
+                                        <span class="text-danger">Deleted</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="text-success">Active</span>
+                                    }
+                                </td>
+                                <td>
+                                     @productCategory.CreatedDate.ToShortDateString()                                
+                                </td>
+                                <td>
+                                     @productCategory.ModifiedDate.ToShortDateString()
+                                </td>
+                                <td>
+                                     @productCategory.DeletedDate.ToShortDateString()
+                                </td>
+                                <td>
+                                    <a asp-action="details" asp-controller="productcategory" asp-route-id=""></a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+               </table>
+           </div>
+       </div>
+    </div>
+</div>
